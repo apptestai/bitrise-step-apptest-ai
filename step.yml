@@ -42,6 +42,7 @@ deps:
   apt_get:
   - name: git
   - name: curl
+  - name: jq
 
 toolkit:
   bash:
