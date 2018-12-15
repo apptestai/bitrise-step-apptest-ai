@@ -51,8 +51,12 @@ function echo_done {
 serviceHost=https://api.apptest.ai
 
 # store the whole response with the status at the and
-apk_file_d='apk_file=@'\"${binary_path}\" data_d='data={"pid":'${project_id}',"test_set_name":"Bitrise_Test"}'
-testRunUrl=${serviceHost}/test_set/queuing?access_key=${access_Key}
+apk_file_d='apk_file=@'\"${binary_path}\" 
+data_d='data={"pid":'${project_id}',"test_set_name":"Bitrise_Test"}'
+testRunUrl=${serviceHost}/test_set/queuing?access_key=${access_key}
+echo $testRunUrl
+echo $apk_file_d
+echo $data_d
 
 HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" -X POST -F $apk_file_d -F $data_d ${testRunUrl})
 
