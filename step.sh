@@ -54,9 +54,6 @@ serviceHost=https://api.apptest.ai
 apk_file_d='apk_file=@'\"${binary_path}\" 
 data_d='data={"pid":'${project_id}',"test_set_name":"Bitrise_Test"}'
 testRunUrl=${serviceHost}/test_set/queuing?access_key=${access_key}
-echo $testRunUrl
-echo $apk_file_d
-echo $data_d
 
 HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" -X POST -F $apk_file_d -F $data_d ${testRunUrl})
 
@@ -126,6 +123,6 @@ echo $(echo $RESULT_DATA | jq -r .result_json)
 mkdir /tmp/apptest_ai
 touch /tmp/apptest_ai/result.json
 echo $(echo $RESULT_DATA | jq -r .result_json) > /tmp/apptest_ai/result.json
-echo_details 'test completed'
+echo_details 'Test completed'
 
 envman add --key APPTEST_AI_TEST_RESULT --value '/tmp/apptest_ai'
