@@ -1,0 +1,78 @@
+#
+# A couple of useful guides & docs:
+#
+# - Main Bitrise CLI docs: https://github.com/bitrise-io/bitrise/tree/master/_docs
+# - Step Development Guideline: https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+# - Bitrise.yml format spec: https://github.com/bitrise-io/bitrise/blob/master/_docs/bitrise-yml-format-spec.md
+# - Bitrise docs: http://devcenter.bitrise.io/
+# - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
+
+title: |-
+  apptest-ai
+summary: |
+  Test your android/ios app using apptest.ai (Fully autonomous app testing)
+description: |
+  Use this step to test your deployed app on AppTest.ai
+  AppTest.ai enable to run smoke tests on several real devices with no officer. 
+  If you don't have a appTest.ai account, register for free [here](https://apptest.ai) and get your ACCESS KEY!
+  The ACCESS KEY value can be found on "Account Info" 
+
+website: https://github.com/genie-park/bitrise-step-apptest-ai
+source_code_url: https://github.com/genie-park/bitrise-step-apptest-ai
+support_url: https://github.com/genie-park/bitrise-step-apptest-ai/issues
+host_os_tags:
+  - osx-10.10
+  - ubuntu-16.04
+
+project_type_tags:
+   - ios
+   - android
+
+type_tags:
+  - test
+
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: true
+
+deps:
+  brew:
+  - name: git
+  - name: curl
+  apt_get:
+  - name: git
+  - name: curl
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+inputs:
+  - binary_path: $BITRISE_APK_PATH 
+    opts:
+      title: "App Binary path for testing"
+      summary: "" 
+      description: ""
+      is_expand: true
+      is_required: true
+  - access_key: $APPTEST_AI_ACCESS_KEY
+    opts:
+      title: "Account API KEY"
+      summary: ""
+      description: ""
+      is_expand: true
+      is_required: true
+  - project_id: $APPTEST_AI_PROJECT_ID
+    opts:
+      title: "AppTest AI Project ID"
+      summary: "you can find Project ID value in project info page"
+      description: ""
+      is_expand: true
+      is_required: true
+
+outputs:
+  - APPTEST_AI_TEST_RESULT:
+    opts:
+      title: "Test result file in JUnit format"
+      summary: "" 
+      description: ""
