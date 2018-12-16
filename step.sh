@@ -126,5 +126,6 @@ TMP_DIR=$(mktemp -d)
 touch ${TMP_DIR}/result.json
 echo $(echo $RESULT_DATA | jq -r .result_json > ${TMP_DIR}/result.json)
 echo_details 'Test completed'
+echo $(cp ${TMP_DIR}/result.json ${BITRISE_DEPLOY_DIR})
 envman add --key APPTEST_AI_TEST_RESULT --value \'${TMP_DIR}\'
-envman add --key VDTESTING_DOWNLOADED_FILES_DIR --value \'${TMP_DIR}\'
+

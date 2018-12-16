@@ -16,7 +16,6 @@ description: |
   AppTest.ai enable to run smoke tests on several real devices with no officer. 
   If you don't have a appTest.ai account, register for free [here](https://apptest.ai) and get your ACCESS KEY!
   The ACCESS KEY value can be found on "Account Info" 
-
 website: https://github.com/genie-park/bitrise-step-apptest-ai
 source_code_url: https://github.com/genie-park/bitrise-step-apptest-ai
 support_url: https://github.com/genie-park/bitrise-step-apptest-ai/issues
