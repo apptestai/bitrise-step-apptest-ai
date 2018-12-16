@@ -113,7 +113,7 @@ while [ ! "$TEST_RUN_RESULT" == "true" ] && [ "$waiting_for_test_results" == "tr
         break
     fi
    
-    echo_details "Waiting for Test Run(${testid}) completed"
+    echo_details "Waiting for Test Run(${tsid}) completed"
     sleep 20s
 done
 
