@@ -83,14 +83,11 @@ TEST_RUN_RESULT='false'
 
 # Get tsid from Test Run api's HTTP_BODY
 tsid=$(echo $HTTP_BODY | jq -r .data.tsid)
-echo 'Apptest.ai TestSet id : '$tsid
+echo 'Your test request is accepted - Test Run id : '$tsid
 
 # Get the Test Result Data
 # Refer to 1. API Spec
 testCompleteCheckUrl=${serviceHost}/test_set/${tsid}/ci_info?access_key=${access_key}
-
-
-echo $waiting_for_test_results
 
 while [ ! "$TEST_RUN_RESULT" == "true" ] && [ "$waiting_for_test_results" == "true" ]; do
     HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" ${testCompleteCheckUrl})
@@ -116,16 +113,17 @@ while [ ! "$TEST_RUN_RESULT" == "true" ] && [ "$waiting_for_test_results" == "tr
         break
     fi
    
-    echo_details "Run not yet completed; waiting................"
-    sleep 10s
+    echo_details "Waiting for Test Run(${testid}) completed"
+    sleep 20s
 done
 
-echo '========================================='
-echo $(echo $RESULT_DATA | jq -r .result_json)
-TMP_DIR=$(mktemp -d)
-touch ${TMP_DIR}/result.json
-echo $(echo $RESULT_DATA | jq -r .result_json > ${TMP_DIR}/result.json)
-echo_details 'Test completed'
-echo $(cp ${TMP_DIR}/result.json ${BITRISE_DEPLOY_DIR})
-envman add --key APPTEST_AI_TEST_RESULT --value \'${TMP_DIR}\'
-
+if [ "$waiting_for_test_results" == "true" ]; then 
+	echo '========================================='
+	echo $(echo $RESULT_DATA | jq -r .result_json)
+	TMP_DIR=$(mktemp -d)
+	touch ${TMP_DIR}/apptest_results.json
+	echo $(echo $RESULT_DATA | jq -r .result_json > ${TMP_DIR}/apptest_results.json)
+	echo $(cp ${TMP_DIR}/apptest_results.json ${BITRISE_DEPLOY_DIR})
+	envman add --key APPTEST_AI_TEST_RESULT --value \'${TMP_DIR}\'
+	echo_details 'Test completed'
+fi
