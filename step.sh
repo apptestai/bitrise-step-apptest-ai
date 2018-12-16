@@ -90,7 +90,9 @@ echo 'Apptest.ai TestSet id : '$tsid
 testCompleteCheckUrl=${serviceHost}/test_set/${tsid}/ci_info?access_key=${access_key}
 
 
-while [ ! "$TEST_RUN_RESULT" == 'true' ]; do
+echo $waiting_for_test_results
+
+while [ ! "$TEST_RUN_RESULT" == "true" ] && [ "$waiting_for_test_results" == "true" ]; do
     HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" ${testCompleteCheckUrl})
 
     # extract the body
@@ -120,9 +122,9 @@ done
 
 echo '========================================='
 echo $(echo $RESULT_DATA | jq -r .result_json)
-mkdir /tmp/apptest_ai
-touch /tmp/apptest_ai/result.json
-echo $(echo $RESULT_DATA | jq -r .result_json) > /tmp/apptest_ai/result.json
+TMP_DIR=$(mktemp -d)
+touch ${TMP_DIR}/result.json
+echo $(echo $RESULT_DATA | jq -r .result_json > ${TMP_DIR}/result.json)
 echo_details 'Test completed'
-
-envman add --key APPTEST_AI_TEST_RESULT --value '/tmp/apptest_ai'
+envman add --key APPTEST_AI_TEST_RESULT --value \'${TMP_DIR}\'
+envman add --key VDTESTING_DOWNLOADED_FILES_DIR --value \'${TMP_DIR}\'

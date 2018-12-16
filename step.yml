@@ -71,6 +71,13 @@ inputs:
       description: ""
       is_expand: true
       is_required: true
+  - waiting_for_test_results: true
+    opts:
+      title: "waiting for app test results"
+      summary: "If you don't want to wait for app test results, just set it false"
+      description: ""
+      is_expand: true
+      is_required: false 
 
 outputs:
   - APPTEST_AI_TEST_RESULT:
