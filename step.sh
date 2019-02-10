@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -e
+	   access_key=${APPTEST_AI_ACCESS_KEY}
+
            if [ -z "${binary_path}" ]; then
              echo "Test app's binary path is needed"
              exit 255
