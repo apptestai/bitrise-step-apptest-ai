@@ -77,7 +77,7 @@ inputs:
       description: ""
       is_expand: true
       is_required: false 
-  - test_result_path: 'test-results'
+  - test_result_path: $BITRISE_DEPLOY_DIR
     opts:
       title: "path for apptest ai test result report"
       summary: "AppTest.ai provide JUnit XML format test result and Full HTML report"
