@@ -16,9 +16,9 @@ description: |
   AppTest.ai enable to run smoke tests on several real devices with no officer. 
   If you don't have a appTest.ai account, register for free [here](https://apptest.ai) and get your ACCESS KEY!
   The ACCESS KEY value can be found on "Account Info" 
-website: https://github.com/genie-park/bitrise-step-apptest-ai
-source_code_url: https://github.com/genie-park/bitrise-step-apptest-ai
-support_url: https://github.com/genie-park/bitrise-step-apptest-ai/issues
+website: https://github.com/apptestai/bitrise-step-apptest-ai
+source_code_url: https://github.com/apptestai/bitrise-step-apptest-ai
+support_url: https://github.com/apptestai/bitrise-step-apptest-ai/issues
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
@@ -77,10 +77,17 @@ inputs:
       description: ""
       is_expand: true
       is_required: false 
+  - test_result_path: 'test-results'
+    opts:
+      title: "path for apptest ai test result report"
+      summary: "AppTest.ai provide JUnit XML format test result and Full HTML report"
+      description: ""
+      is_expand: true
+      is_required: false
 
 outputs:
-  - APPTEST_AI_TEST_RESULT:
+  - APPTEST_AI_TEST_RESULTS:
     opts:
-      title: "Test result file in JUnit format"
+      title: "Test result file path(JUnit: XML(apptestai/result.xml, Full Report: apptest-ai_result.html"
       summary: "" 
       description: ""
