@@ -75,8 +75,7 @@ set -e
              echo "|                        Device                        |  Result  |"
              echo "+-----------------------------------------------------------------+"
              echo ${TEST_RESULT} | jq -r \
-                  'if has("system-out") then "\""+ .name + "\" \"<1> Passed <0>\"" else "\"" + .name + "\" \"<2> Failed <0>\" " end ' \
-                  | sed -e 's/<2>/\\e[31m/g' -e 's/<1>/\\e[32m/g' -e 's/<0>/\\e[0m/g' \
+                  'if has("system-out") then "\""+ .name + "\" \" Passed \"" else "\"" + .name + "\" \" Failed \" " end ' \
                   | xargs printf "| %-52s | %b | \n"
              echo "+-----------------------------------------------------------------+"
 
