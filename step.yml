@@ -84,10 +84,3 @@ inputs:
       description: ""
       is_expand: true
       is_required: false
-
-outputs:
-  - APPTEST_AI_TEST_RESULTS:
-    opts:
-      title: "Test result file path(JUnit: XML(apptestai/result.xml, Full Report: apptest-ai_result.html"
-      summary: "" 
-      description: ""
